@@ -1,0 +1,36 @@
+body {
+    background: #eee;
+    font-family: "Roboto Slab";
+}
+
+#container {
+    max-width: 960px;
+    margin: 0 auto;
+    background: #fff;
+}
+
+.navigation {
+    list-style: none;
+    border-bottom: 1px solid #bbb;
+    padding: 0;
+    margin: 0;
+}
+
+.navigation li {
+    display: inline-block;
+}
+
+.navigation li span,
+.navigation li a{
+    color: #666;
+    text-decoration: none;
+    cursor: pointer;
+    padding: 20px;
+    display: inline-block;
+}
+
+.navigation li ul {
+    display: none;
+    padding: 0;
+    margin: 0;
+}
