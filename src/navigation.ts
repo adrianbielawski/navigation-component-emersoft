@@ -84,7 +84,7 @@ const Navigation = (container: Element, items: ItemType[]) => {
             i++
         }
 
-        if (i < items.length) {
+        if (itemsWidth > list.offsetWidth) {
             while (itemsWidth + showMore.offsetWidth > list.offsetWidth) {
                 i--
                 itemsWidth -= listItems[i].offsetWidth
@@ -94,6 +94,8 @@ const Navigation = (container: Element, items: ItemType[]) => {
                 showMoreChildren.appendChild(li)
             })
             showMore.classList.add('visible')
+        } else {
+            showMore.classList.remove('visible')
         }
 
         showMoreChildren.style.width = `${list.offsetWidth - itemsWidth}px`
