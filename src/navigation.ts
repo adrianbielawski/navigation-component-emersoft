@@ -40,9 +40,6 @@ const Navigation = (container: Element, items: ItemType[]) => {
 
         showMoreActive = !showMore.classList.contains('active')
 
-        const itemsWidth = showMore.offsetLeft - list.offsetLeft;
-        showMoreChildren.style.width = `${list.clientWidth - itemsWidth}px`
-
         const isMobile = window.matchMedia('screen and (max-width: 600px)')
         if (isMobile) {
             showMoreChildren.style.top = `${list.offsetTop + list.offsetHeight}px`
@@ -78,27 +75,28 @@ const Navigation = (container: Element, items: ItemType[]) => {
         let i = 0
         let itemsWidth = 0
 
-        while (itemsWidth < list.getBoundingClientRect().width && i < items.length) {
-            itemsWidth += listItems[i].getBoundingClientRect().width
+        listItems.forEach(li => {
+            list.insertBefore(li, showMore)
+        })
+
+        while (itemsWidth < list.offsetWidth && i < items.length) {
+            itemsWidth += listItems[i].offsetWidth
             i++
         }
 
         if (i < items.length) {
-            while (itemsWidth + showMore.getBoundingClientRect().width > list.getBoundingClientRect().width) {
-                itemsWidth -= listItems[i].getBoundingClientRect().width
+            while (itemsWidth + showMore.offsetWidth > list.offsetWidth) {
                 i--
+                itemsWidth -= listItems[i].offsetWidth
             }
-        }
 
-        listItems.slice(0, i).forEach(li => {
-            list.insertBefore(li, showMore)
-        })
-        if (i < items.length) {
             listItems.slice(i).forEach(li => {
                 showMoreChildren.appendChild(li)
             })
             showMore.classList.add('visible')
         }
+
+        showMoreChildren.style.width = `${list.offsetWidth - itemsWidth}px`
     }
 
     window.addEventListener('resize', reflow)
