@@ -21,11 +21,16 @@ export const Item = (item: ItemType) : HTMLLIElement => {
         li.appendChild(link)
     }
     else {
+        li.className = 'group'
+        let active = false
+
         const title = document.createElement('span')
         title.innerText = item.title
+
         const chevron = document.createElement('i')
         chevron.classList.add('fas', 'fa-chevron-down')
         title.appendChild(chevron)
+
         li.appendChild(title)
 
         const children = document.createElement('ul')
@@ -34,9 +39,6 @@ export const Item = (item: ItemType) : HTMLLIElement => {
             children.appendChild(childLi)
         }
         li.appendChild(children)
-
-        li.className = 'group'
-        let active = false
 
         li.addEventListener('click', (e) => {
             e.stopPropagation()

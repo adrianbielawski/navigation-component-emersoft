@@ -1,6 +1,6 @@
 body {
     background: #eee;
-    font-family: "Roboto Slab";
+    font-family: "Roboto Slab", serif;
 }
 
 #container {
@@ -15,6 +15,7 @@ body {
     margin: 0;
     white-space: nowrap;
     box-shadow: 0 1px 2px #bbb;
+    overflow-x: hidden;
 }
 
 .navigation li {
@@ -42,7 +43,9 @@ body {
 }
 
 .navigation .group span i {
+    width: 14px;
     margin-left: 10px;
+    display: inline-block
 }
 
 .navigation .group ul {
@@ -56,9 +59,10 @@ body {
     border-top: none;
     white-space: normal;
     opacity: 0;
-    transition: all 0.2s ease-out;
+    transition: opacity 0.2s ease-out, visibility 0.2s;
 }
 
+.navigation .group ul li span,
 .navigation .group ul li a {
     display: block;
     border-right: none;
@@ -71,11 +75,72 @@ body {
     text-shadow: 0 0 1px #474767;
 }
 
-.navigation .group.active ul {
+.navigation .group.active > ul {
     visibility: visible;
     opacity: 1;
 }
 
-.navigation .group.active ul li {
+.navigation .group.active > ul li {
     display: block;
+}
+
+.navigation .show-more {
+    visibility: hidden;
+    box-shadow: inset 6px 4px 12px rgba(0, 0, 0, .07);
+}
+
+.navigation .show-more.visible {
+    visibility: visible;
+}
+
+.navigation .show-more.active > span {
+    border-bottom: 2px solid transparent;
+}
+
+.navigation .show-more > span {
+    border-right: none;
+}
+
+.navigation .show-more > span i {
+    margin-left: 0;
+    margin-right: 10px;
+}
+
+.navigation .show-more .group span {
+    padding-right: 34px;
+    display: block;
+}
+
+.navigation .show-more .group span i {
+    position: absolute;
+    right: 10px;
+}
+
+.navigation .show-more .group ul {
+    position: static;
+    display: none;
+    box-shadow: inset 0 -5px 10px rgba(0, 0, 0, .07);
+    background: #f9f9f9;
+    border-top: 1px solid #8d8d8d;
+}
+
+.navigation .show-more .group.active span {
+    color: #474767;
+    text-shadow: 0 0 1px #474767;
+}
+
+.navigation .show-more .group.active ul {
+    display: block;
+}
+
+.navigation .show-more .group.active a {
+    color: #666;
+    text-shadow: none;
+    border-bottom: 2px solid transparent;
+}
+
+.navigation .show-more .group span:hover,
+.navigation .show-more .group.active a:hover {
+    color: #474767;
+    text-shadow: 0 0 1px #474767;
 }
