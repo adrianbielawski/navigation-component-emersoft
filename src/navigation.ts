@@ -65,8 +65,8 @@ const Navigation = (container: Element, items: ItemType[]) => {
         const hide = () => {
             showMoreActive = false
             showMore.classList.remove('active')
-            chevron.classList.remove('fa-short-amount-up')
-            chevron.classList.add('fa-short-amount-down')
+            chevron.classList.remove('fa-sort-amount-up-alt')
+            chevron.classList.add('fa-sort-amount-down-alt')
             document.removeEventListener('click', hide)
         }
         document.addEventListener('click', hide)
