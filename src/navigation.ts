@@ -38,7 +38,7 @@ const Navigation = (container: Element, items: ItemType[]) => {
     showMore.addEventListener('click', (e) => {
         e.stopPropagation()
 
-        showMoreActive = !showMoreActive
+        showMoreActive = !showMore.classList.contains('active')
 
         const itemsWidth = showMore.offsetLeft - list.offsetLeft;
         showMoreChildren.style.width = `${list.clientWidth - itemsWidth}px`

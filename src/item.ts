@@ -43,7 +43,7 @@ export const Item = (item: ItemType) : HTMLLIElement => {
         li.addEventListener('click', (e) => {
             e.stopPropagation()
 
-            active = !active
+            active = !li.classList.contains('active')
 
             children.style.maxWidth = `${li.clientWidth}px`
             li.parentElement.querySelectorAll('.active').forEach(c => {
