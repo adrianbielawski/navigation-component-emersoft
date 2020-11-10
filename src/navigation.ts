@@ -29,6 +29,10 @@ const Navigation = (container: Element, items: ItemType[]) => {
     const showMoreChildren = document.createElement('ul')
     showMore.appendChild(showMoreChildren)
 
+    const showMoreOverlay = document.createElement('div')
+    showMoreOverlay.className = 'overlay'
+    showMore.appendChild(showMoreOverlay)
+
     let showMoreActive = false
 
     showMore.addEventListener('click', (e) => {
@@ -38,8 +42,21 @@ const Navigation = (container: Element, items: ItemType[]) => {
 
         const itemsWidth = showMore.offsetLeft - list.offsetLeft;
         showMoreChildren.style.width = `${list.clientWidth - itemsWidth}px`
+
+        const isMobile = window.matchMedia('screen and (max-width: 600px)')
+        if (isMobile) {
+            showMoreChildren.style.top = `${list.offsetTop + list.offsetHeight}px`
+            showMoreOverlay.style.top = `${list.offsetTop + list.offsetHeight}px`
+        } else {
+            showMoreChildren.style.top = 'unset'
+            showMoreOverlay.style.top = 'unset'
+        }
+
         showMore.parentElement.querySelectorAll('.active').forEach(c => {
             c.classList.remove('active')
+            const chevron = c.querySelector('i')
+            chevron.classList.remove('fa-chevron-up')
+            chevron.classList.add('fa-chevron-down')
         })
         showMore.classList.toggle('active', showMoreActive)
         chevron.classList.toggle('fa-sort-amount-up-alt', showMoreActive)

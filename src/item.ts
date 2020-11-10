@@ -48,6 +48,9 @@ export const Item = (item: ItemType) : HTMLLIElement => {
             children.style.maxWidth = `${li.clientWidth}px`
             li.parentElement.querySelectorAll('.active').forEach(c => {
                 c.classList.remove('active')
+                const chevron = c.querySelector('i')
+                chevron.classList.remove('fa-chevron-up')
+                chevron.classList.add('fa-chevron-down')
             })
             li.classList.toggle('active', active)
             chevron.classList.toggle('fa-chevron-up', active)
