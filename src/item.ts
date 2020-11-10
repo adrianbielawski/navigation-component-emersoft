@@ -14,15 +14,18 @@ export type ItemType = ItemWithUrl | ItemWithChildren
 
 export const Item = (item: ItemType) : HTMLLIElement => {
     const li = document.createElement('li')
-    if ((item as ItemWithUrl).url !== undefined) {
+    if (item.url !== undefined) {
         const link = document.createElement('a')
-        link.href = (item as ItemWithUrl).url
+        link.href = item.url
         link.innerText = item.title
         li.appendChild(link)
     }
     else {
         const title = document.createElement('span')
         title.innerText = item.title
+        const chevron = document.createElement('i')
+        chevron.classList.add('fas', 'fa-chevron-down')
+        title.appendChild(chevron)
         li.appendChild(title)
 
         const children = document.createElement('ul')
@@ -31,6 +34,32 @@ export const Item = (item: ItemType) : HTMLLIElement => {
             children.appendChild(childLi)
         }
         li.appendChild(children)
+
+        li.className = 'group'
+        let active = false
+
+        li.addEventListener('click', (e) => {
+            e.stopPropagation()
+
+            active = !active
+
+            children.style.maxWidth = `${li.clientWidth}px`
+            li.parentElement.querySelectorAll('.active').forEach(c => {
+                c.classList.remove('active')
+            })
+            li.classList.toggle('active', active)
+            chevron.classList.toggle('fa-chevron-up', active)
+            chevron.classList.toggle('fa-chevron-down', !active)
+
+            const hide = () => {
+                active = false
+                li.classList.remove('active')
+                chevron.classList.remove('fa-chevron-up')
+                chevron.classList.add('fa-chevron-down')
+                document.removeEventListener('click', hide)
+            }
+            document.addEventListener('click', hide)
+        })
     }
     return li
 }

@@ -11,9 +11,10 @@ body {
 
 .navigation {
     list-style: none;
-    border-bottom: 1px solid #bbb;
     padding: 0;
     margin: 0;
+    white-space: nowrap;
+    box-shadow: 0 1px 2px #bbb;
 }
 
 .navigation li {
@@ -21,16 +22,60 @@ body {
 }
 
 .navigation li span,
-.navigation li a{
+.navigation li a {
     color: #666;
     text-decoration: none;
     cursor: pointer;
     padding: 20px;
     display: inline-block;
+    border: 2px solid transparent;
+    border-right: 1px solid #eee;
+    border-left: 0;
 }
 
-.navigation li ul {
-    display: none;
+.navigation > li.active > span,
+.navigation > li:hover > span,
+.navigation > li:hover > a {
+    color: #474767;
+    text-shadow: 0 0 1px #474767;
+    border-bottom: 2px solid #474767;
+}
+
+.navigation .group span i {
+    margin-left: 10px;
+}
+
+.navigation .group ul {
+    position: absolute;
+    visibility: hidden;
     padding: 0;
     margin: 0;
+    list-style: none;
+    background: #fff;
+    box-shadow: 0 1px 3px #bbb;
+    border-top: none;
+    white-space: normal;
+    opacity: 0;
+    transition: all 0.2s ease-out;
+}
+
+.navigation .group ul li a {
+    display: block;
+    border-right: none;
+    border-bottom: none;
+    padding: 10px 20px;
+}
+
+.navigation .group ul li:hover a {
+    color: #474767;
+    text-shadow: 0 0 1px #474767;
+}
+
+.navigation .group.active ul {
+    visibility: visible;
+    opacity: 1;
+}
+
+.navigation .group.active ul li {
+    display: block;
 }
